@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletControl : MonoBehaviour
 {
     private int damage = 0;
+    private bool isArm = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,9 +16,10 @@ public class BulletControl : MonoBehaviour
         
     }
 
-    public void SetDamage(int dmg)
+    public void SetDamage(int dmg, bool isArm = false)
     {
         damage = dmg;
+        this.isArm = isArm;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +31,6 @@ public class BulletControl : MonoBehaviour
             if (enemyControl != null) enemyControl.ChangeHP(-damage);
             //Destroy(other.gameObject);
         }
-        Destroy(gameObject);
+        if (false == isArm) Destroy(gameObject);
     }
 }

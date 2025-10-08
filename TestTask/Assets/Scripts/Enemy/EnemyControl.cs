@@ -7,7 +7,7 @@ public class EnemyControl : MonoBehaviour
     private int damage;
     private int price;
     private int exp;
-    private float radius;
+    private float radius = 1.5f;
     private LevelControl levelControl;
     private EnemyMovement enemyMovement;
     private ArmTrigger armTrigger;
@@ -63,8 +63,9 @@ public class EnemyControl : MonoBehaviour
         if ((zn < 0) && ((hp + zn) <= 0))
         {   //  убит
             hp = 0;
-            levelControl.EnemyDestroy(price, exp);
-            Destroy(gameObject);
+            if (levelControl != null) levelControl.EnemyDestroy(price, exp);
+            enemyMovement.EnemyDead();
+            Destroy(gameObject, 1.5f);
         }
         else
         {

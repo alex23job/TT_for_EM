@@ -65,6 +65,13 @@ public class EnemyMovement : MonoBehaviour
         target = points[curIndex];
     }*/
 
+    public void EnemyDead()
+    {
+        anim.SetBool("IsWalk", false);
+        anim.SetBool("IsAttack", false);
+        anim.SetBool("IsDead", true);
+    }
+
     public void Attack(Transform targetAttack, int damage)
     {
         Vector3 direction = targetAttack.position - transform.position;

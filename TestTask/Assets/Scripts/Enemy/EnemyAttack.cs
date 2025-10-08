@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private float detectionRadius = 0;
+    private float detectionRadius = 1.5f;
     private float timer = 0.25f;
 
     private EnemyControl enemyControl;
