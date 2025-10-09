@@ -950,7 +950,6 @@ GameObject:
   - component: {fileID: 1663534729}
   - component: {fileID: 1663534732}
   - component: {fileID: 1663534731}
-  - component: {fileID: 1663534730}
   - component: {fileID: 1663534733}
   - component: {fileID: 1663534734}
   m_Layer: 0
@@ -975,22 +974,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1663534730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663534728}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a18bec881f3feb49a351c35942430eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1085643290}
-  followSpeed: 5
-  offsetY: 2
-  offsetZ: -3.5
 --- !u!81 &1663534731
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1032,7 +1015,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1160,6 +1143,14 @@ PrefabInstance:
     - target: {fileID: 5282525498010991140, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
       propertyPath: m_Name
       value: EnemyWarior
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223639923453993802, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223639923453993802, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9060074946997109297, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
       propertyPath: m_LocalPosition.x
