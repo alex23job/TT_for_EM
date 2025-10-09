@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TempleControl : MonoBehaviour
 {
-    private Animator _animDoorLeft, _animDoorRight;
+    //private Animator _animDoorLeft, _animDoorRight;
 
     private int maxTempleHP = 1000;
     private int templeHP = 1000;
@@ -12,8 +12,8 @@ public class TempleControl : MonoBehaviour
 
     private void Awake()
     {
-        _animDoorLeft = transform.GetChild(1).GetComponent<Animator>();
-        _animDoorRight = transform.GetChild(2).GetComponent<Animator>();
+        //_animDoorLeft = transform.GetChild(1).GetComponent<Animator>();
+        //_animDoorRight = transform.GetChild(2).GetComponent<Animator>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
