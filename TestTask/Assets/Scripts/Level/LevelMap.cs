@@ -183,7 +183,7 @@ public class LevelMap : MonoBehaviour
         int[] ends = new int[4]{ 188, 191, 208, 211 };
         print($"startPos={sizePole * y + x} (x={x}, y={y})");
         WavePath wavePath = new WavePath();
-        path = wavePath.GetPath(sizePole * y + x, ends, pole, sizePole);
+        path = wavePath.GetPath(sizePole * y + x, ends, pole, sizePole, sizePole);
         return path;
     }
 

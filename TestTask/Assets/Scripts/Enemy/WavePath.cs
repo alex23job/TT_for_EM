@@ -9,16 +9,18 @@ public class WavePath
     private int[] endPath;
     private int startNum = -1, endNum = -1;
     private int sizeRow, maxZn = 1000;
+    private int sizeCol;
     private List<int> path = new List<int>();
     private int countRoads = 0;
 
-    public List<int> GetPath(int start, int[] end, int[] pole, int szRow)
+    public List<int> GetPath(int start, int[] end, int[] pole, int szRow, int szCol)
     {
         path.Clear();
         startNum = start;
         endPath = end;
         endNum = -1;
         sizeRow = szRow;
+        sizeCol = szCol;
         arQu = new int[pole.Length];
         for (int i = 0; i < pole.Length; i++)
         {
@@ -44,11 +46,11 @@ public class WavePath
             path.Add(endNum);
             while (step > 0)
             {
-                x = i % sizeRow; y = i / sizeRow;
+                x = i % sizeCol; y = i / sizeCol;
                 if ((x > 0) && (arQu[i - 1] != -1) && (arQu[i - 1] < arQu[i])) { step = arQu[i - 1]; path.Add(i - 1); i--; continue; }
-                if ((x < sizeRow - 1) && (arQu[i + 1] != -1) && (arQu[i + 1] < arQu[i])) { step = arQu[i + 1]; path.Add(i + 1); i++; continue; }
-                if ((y > 0) && (arQu[i - sizeRow] != -1) && (arQu[i - sizeRow] < arQu[i])) { step = arQu[i - sizeRow]; path.Add(i - sizeRow); i -= sizeRow; continue; }
-                if ((y < sizeRow - 1) && (arQu[i + sizeRow] != -1) && (arQu[i + sizeRow] < arQu[i])) { step = arQu[i + sizeRow]; path.Add(i + sizeRow); i += sizeRow; continue; }
+                if ((x < sizeCol - 1) && (arQu[i + 1] != -1) && (arQu[i + 1] < arQu[i])) { step = arQu[i + 1]; path.Add(i + 1); i++; continue; }
+                if ((y > 0) && (arQu[i - sizeCol] != -1) && (arQu[i - sizeCol] < arQu[i])) { step = arQu[i - sizeCol]; path.Add(i - sizeCol); i -= sizeCol; continue; }
+                if ((y < sizeRow - 1) && (arQu[i + sizeCol] != -1) && (arQu[i + sizeCol] < arQu[i])) { step = arQu[i + sizeCol]; path.Add(i + sizeCol); i += sizeCol; continue; }
             }
             path.Reverse();
 
@@ -74,11 +76,11 @@ public class WavePath
             for (i = 0; i < arQu.Length; i++)
             {
                 if ((arQu[i] == -1) || (arQu[i] >= step)) continue;
-                x = i % sizeRow;y = i / sizeRow;
+                x = i % sizeCol;y = i / sizeCol;
                 if ((x > 0) && (arQu[i - 1] != -1) && (arQu[i - 1] == maxZn)) arQu[i - 1] = step;
-                if ((x < sizeRow - 1) && (arQu[i + 1] != -1) && (arQu[i + 1] == maxZn)) arQu[i + 1] = step;
-                if ((y > 0) && (arQu[i - sizeRow] != -1) && (arQu[i - sizeRow] == maxZn)) arQu[i - sizeRow] = step;
-                if ((y < sizeRow - 1) && (arQu[i + sizeRow] != -1) && (arQu[i + sizeRow] == maxZn)) arQu[i + sizeRow] = step;
+                if ((x < sizeCol - 1) && (arQu[i + 1] != -1) && (arQu[i + 1] == maxZn)) arQu[i + 1] = step;
+                if ((y > 0) && (arQu[i - sizeCol] != -1) && (arQu[i - sizeCol] == maxZn)) arQu[i - sizeCol] = step;
+                if ((y < sizeRow - 1) && (arQu[i + sizeCol] != -1) && (arQu[i + sizeCol] == maxZn)) arQu[i + sizeCol] = step;
             }
             step++;
             for (i = 0, countWave = 0; i < arQu.Length; i++)
@@ -91,10 +93,10 @@ public class WavePath
 
             if (countWave >= countRoads) break;
         }
-        /*StringBuilder sb = new StringBuilder();
-        //for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]}{((i % 20 == 19) ? "\n" : " ")}");
-        for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]} ");
-        Debug.Log(sb.ToString());*/
+        StringBuilder sb = new StringBuilder();
+        for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]:00}{((arQu[i] >= 0) ? "  " : "")}{((i % sizeCol == (sizeCol - 1)) ? "\n" : " ")}");
+        //for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]} ");
+        Debug.Log(sb.ToString());
     }
 
     private int GetEndPath()

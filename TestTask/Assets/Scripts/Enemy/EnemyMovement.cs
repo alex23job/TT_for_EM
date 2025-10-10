@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float movementSpeed = 5f;
+    private float movementSpeed = 10f;
     private float rotationSpeed = 5f;
     private Vector3 target;
     private bool isMove = false;
@@ -13,6 +13,7 @@ public class EnemyMovement : MonoBehaviour
 
     private List<Vector3> points = new List<Vector3>();
     private int curIndex = 0;
+    private bool isPatrouille = false;
     private Rigidbody rb;
     private float stoppingDistance = 0.2f;
 
@@ -94,6 +95,7 @@ public class EnemyMovement : MonoBehaviour
             
             if (box != null)
             {
+                target = targetAttack.transform.position;
                 Vector3 dir;
                 float distance;
                 Physics.ComputePenetration(capsule, transform.position, transform.rotation, box, box.transform.position, box.transform.rotation, out dir, out distance);
@@ -103,6 +105,10 @@ public class EnemyMovement : MonoBehaviour
                     transform.rotation = Quaternion.LookRotation(direction);
                     anim.SetBool("IsAttack", true);
                     Invoke("EndAttack", 0.5f);
+                }
+                else
+                {
+                    rb.MovePosition(transform.position + dir.normalized * movementSpeed * Time.deltaTime);
                 }
             }
         }
@@ -136,6 +142,7 @@ public class EnemyMovement : MonoBehaviour
         {
             target = points[curIndex];
             curIndex++;
+            if (isPatrouille) curIndex %= points.Count;
         }
         else
         {
@@ -145,12 +152,13 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void SetPath(List<Vector3> path)
+    public void SetPath(List<Vector3> path, bool isPatrouille = false)
     {
         points.Clear();
         points.AddRange(path);
         curIndex = 0;
         target = points[curIndex];
+        this.isPatrouille = isPatrouille;
         isMove = true;
         //anim.SetFloat("Speed", 1f);
         anim.SetBool("IsWalk", true);

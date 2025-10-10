@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             timer = 0.5f;
-            if ((transform.position.x > -1f && transform.position.x < 1f) && (transform.position.z > -1f && transform.position.z < 1f)) shooting.ChangeEnergy(recoverableEnergy);
+            //if ((transform.position.x > -1f && transform.position.x < 1f) && (transform.position.z > -1f && transform.position.z < 1f)) shooting.ChangeEnergy(recoverableEnergy);
         }
     }
 
@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviour
 
     private void SendShootingParams()
     {
-        shooting.SetEnergy(120);    //  это пока, а так из GM надо взять
+        //shooting.SetEnergy(120);    //  это пока, а так из GM надо взять
     }
 
     public void ChangeHP(int zn)

@@ -25,9 +25,9 @@ public class LevelControl : MonoBehaviour
     public void EnemyDestroy(int price, int exp)
     {
         currentExp += exp;
-        ui_Control.ViewExp(currentExp);
+        if (ui_Control !=null) ui_Control.ViewExp(currentExp);
         currentMany += price;
-        ui_Control.ViewMany(currentMany);
+        if (ui_Control != null) ui_Control.ViewMany(currentMany);
     }
 
     public bool CheckMany(int zn)
@@ -38,17 +38,17 @@ public class LevelControl : MonoBehaviour
     public void ChangeMany(int zn)
     {
         currentMany += zn;
-        ui_Control.ViewMany(currentMany);
+        if (ui_Control != null) ui_Control.ViewMany(currentMany);
     }
 
     public void ViewPlayerEnergy(int energy)
     {
-        ui_Control.ViewEnergy(energy);
+        if (ui_Control != null) ui_Control.ViewEnergy(energy);
     }
 
     public void ViewPlayerHP(int hp)
     {
-        ui_Control.ViewHP(hp);
+        if (ui_Control != null) ui_Control.ViewHP(hp);
     }
 
     public PlayerControl GetPlayerControl()

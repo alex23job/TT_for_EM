@@ -28,7 +28,7 @@ public class EnemyControl : MonoBehaviour
     void Start()
     {
         enemyViewHP.SetActive(false);
-        Test();
+        //Test();
     }
 
     // Update is called once per frame
@@ -67,10 +67,12 @@ public class EnemyControl : MonoBehaviour
     {
         levelControl = lc;
         hp = ei.Hp;
+        maxHP = hp;
         exp = ei.Exp;
         radius = ei.Radius;
         damage = ei.Damage;
         price = ei.Price;
+        if (ei.NumArm > 0) gameObject.GetComponent<SelectArm>().SelectCurrentArm(ei.NumArm);
         if (armTrigger != null) armTrigger.SetDamage(damage);
     }
 
@@ -88,7 +90,7 @@ public class EnemyControl : MonoBehaviour
         {
             hp += zn;
             enemyViewHP.SetActive(true);
-            enemyHP.ViewHP(hp / maxHP);
+            enemyHP.ViewHP((float)hp / maxHP);
         }
     }
 }
@@ -102,6 +104,7 @@ public class EnemyInfo
     private int price;
     private int exp;
     private float radius;
+    private int numArm;
 
     public string NameEnemy { get => nameEnemy; }
     public int Hp { get => hp; }
@@ -110,8 +113,10 @@ public class EnemyInfo
     public int Exp { get => exp; }
     public float Radius { get => radius; }
 
+    public int NumArm { get => numArm; }
+
     public EnemyInfo() { }
-    public EnemyInfo(string nm, int hp, int dmg, int prc, int exp, float rad)
+    public EnemyInfo(string nm, int hp, int dmg, int prc, int exp, float rad, int numArm = 0)
     {
         nameEnemy = nm;
         this.hp = hp;
@@ -119,5 +124,11 @@ public class EnemyInfo
         this.price = prc;
         this.exp = exp;
         this.radius = rad;
+        this.numArm = numArm;
+    }
+
+    public void SetNumberArm(int num)
+    {
+        this.numArm = num;
     }
 }

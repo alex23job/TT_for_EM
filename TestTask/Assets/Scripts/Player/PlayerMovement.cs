@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameObject.GetComponent<SelectArm>().SetArmDamage(new int[] { 10, 15, 20 });
+        gameObject.GetComponent<SelectArm>().SetArmDamage(new int[] { 5, 10, 20 });
     }
 
     // Update is called once per frame
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("IsJump", false);
         anim.SetBool("IsAttack", true);
             
-        Invoke("EndAttack", 1.5f);
+        Invoke("EndAttack", 0.5f);
     }
 
     private void EndAttack()

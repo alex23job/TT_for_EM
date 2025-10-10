@@ -25,21 +25,21 @@ public class UI_Control : MonoBehaviour
 
     public void ViewExp(int exp)
     {
-        txtExp.text = exp.ToString();
+        if (txtExp != null) txtExp.text = exp.ToString();
     }
 
     public void ViewMany(int many)
     {
-        txtMany.text = many.ToString();
+        if (txtMany != null) txtMany.text = many.ToString();
     }
 
     public void ViewEnergy(int energy)
     {
-        txtEnergy.text = energy.ToString();
+        if (txtEnergy != null) txtEnergy.text = energy.ToString();
     }
 
     public void ViewHP(int hp)
     {
-        txtHP.text = hp.ToString();
+        if (txtHP) txtHP.text = hp.ToString();
     }
 }

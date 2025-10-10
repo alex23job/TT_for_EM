@@ -3,7 +3,7 @@ using UnityEngine;
 public class ArmTrigger : MonoBehaviour
 {
     private int damage = 0;
-    private bool isAttack = false;
+    //private bool isAttack = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,11 +27,11 @@ public class ArmTrigger : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("EnemyTarget"))
         {
-            isAttack = true;
-            if (other.CompareTag("Player"))
+            //isAttack = true;
+            /*if (other.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerControl>().ChangeHP(-damage);
-            }
+            }*/
             if (other.CompareTag("Temple"))
             {
                 other.gameObject.GetComponent<TempleControl>().ChangeHP(-damage);
@@ -39,8 +39,8 @@ public class ArmTrigger : MonoBehaviour
         }
     }
 
-    private void EndAttack()
+    /*private void EndAttack()
     {
         isAttack = false;
-    }
+    }*/
 }

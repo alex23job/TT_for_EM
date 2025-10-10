@@ -9,17 +9,20 @@ public class SelectArm : MonoBehaviour
 
     private int[] armDamage = null;
     private int currentArmIndex = 0;
+    private bool isPlayerArm = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerControl playerControl = gameObject.GetComponent<PlayerControl>(); 
+        if (playerControl != null) isPlayerArm = true;
     }
 
     public void SetArmDamage(int[] dmg)
     {
         armDamage = new int[dmg.Length];
         for (int i = 0; i < armDamage.Length; i++) armDamage[i] = dmg[i];
-        arms[currentArmIndex].GetComponent<BulletControl>().SetDamage(armDamage[0], true);
+        arms[currentArmIndex].GetComponent<BulletControl>().SetDamage(armDamage[0], true, isPlayerArm);
     }
 
     public void SelectCurrentArm(int index)
@@ -30,7 +33,8 @@ public class SelectArm : MonoBehaviour
             currentArmIndex = index;
             if ((armDamage != null) && (index >= 0) && (index < armDamage.Length))
             {
-                arms[currentArmIndex].GetComponent<BulletControl>().SetDamage(armDamage[index], true);
+                arms[currentArmIndex].GetComponent<BulletControl>().SetDamage(armDamage[index], true, isPlayerArm);
+                arms[currentArmIndex].GetComponent<ArmTrigger>().SetDamage(armDamage[index]);
             }
         }
         arms[currentArmIndex].SetActive(true);
