@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Control : MonoBehaviour
@@ -16,6 +17,9 @@ public class UI_Control : MonoBehaviour
     [SerializeField] private Button btnSellAptechka;
     [SerializeField] private Text txtCold;
 
+    [SerializeField] private GameObject lossPanel;
+    [SerializeField] private GameObject winPanel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +34,16 @@ public class UI_Control : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ViewLossPanel()
+    {
+        lossPanel.SetActive(true);
     }
 
     public void ViewExp(int exp)

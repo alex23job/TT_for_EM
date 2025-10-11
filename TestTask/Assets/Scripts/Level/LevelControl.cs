@@ -84,4 +84,9 @@ public class LevelControl : MonoBehaviour
     {
         return playerControl;
     }
+
+    public void ViewLossPanel()
+    {
+        ui_Control.ViewLossPanel();
+    }
 }

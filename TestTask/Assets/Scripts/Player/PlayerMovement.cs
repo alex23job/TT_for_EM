@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     bool isAttack = false;
     bool isJump = false;
+    bool isLoss = false;
 
     private float timer = 1f;
     private float myVelocity = 0;
@@ -41,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             timer = 0.25f;
+            if (isLoss)
+            {
+                anim.SetBool("IsDead", true);
+                return;
+            }
+            
             //anim.SetFloat("WalkSpeed", rb.linearVelocity.magnitude * 1000);
             if (isAttack)
             {
@@ -106,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
         //rb.AddForce(movement, ForceMode.Impulse);
         Move(ver);
         Turn(hor);
+    }
+
+    public void PlayerLoss()
+    {
+        isLoss = true;
     }
 
     private void Attack()

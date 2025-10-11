@@ -57,6 +57,9 @@ public class PlayerControl : MonoBehaviour
         else if (currentHP + zn < 0)
         {   //  наш защитник убит !!!
             currentHP = 0;
+            PlayerMovement playerMovement = gameObject.GetComponent<PlayerMovement>();
+            if (playerMovement != null) playerMovement.PlayerLoss();
+            levelControl.ViewLossPanel();
         }
         else currentHP += zn;
         if ((currentHP < (maxHP / 2)) && (countAptechka > 0))
@@ -66,6 +69,11 @@ public class PlayerControl : MonoBehaviour
             levelControl.ViewAptechka(countAptechka);
         }
         ViewHP();
+    }
+
+    public void ViewLossPanel()
+    {
+        if (levelControl != null) levelControl.ViewLossPanel();
     }
 
     public void AddingAptecka()
