@@ -23,6 +23,7 @@ public class BoardMap : MonoBehaviour
         CreateSpawnLists();
         CreatePole();
         BeforeSpawnEnemy();
+        BeforeSpawnBonus();
     }
 
     // Update is called once per frame
@@ -87,7 +88,7 @@ public class BoardMap : MonoBehaviour
                     foreach (int num in path)
                     {
                         vectors.Add(new Vector3(offsetX + 2 * (num % countCol), 1f, offsetZ - 2 * (num / countCol)));
-                        print($"{vectors.Count}) numTail={num} point={vectors[vectors.Count - 1]}"); 
+                        //print($"{vectors.Count}) numTail={num} point={vectors[vectors.Count - 1]}"); 
                     }
                     spawn.TranslatePath(vectors);
                 }
@@ -97,6 +98,14 @@ public class BoardMap : MonoBehaviour
                 spawn.SetPrefab(prefabEnemy, new EnemyInfo("Воин с молотом", 10, 2, 10, 10, 2, 2));
                 spawn.SetDelaySpawn(10f);
             }
+        }
+    }
+
+    private void BeforeSpawnBonus()
+    {
+        foreach(SpawnBonus spawn in spawnBonuses)
+        {
+            spawn.SetSpawnDelay(15f);
         }
     }
 

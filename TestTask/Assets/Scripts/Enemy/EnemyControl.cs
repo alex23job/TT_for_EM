@@ -81,7 +81,12 @@ public class EnemyControl : MonoBehaviour
         if ((zn < 0) && ((hp + zn) <= 0))
         {   //  убит
             hp = 0;
-            if (levelControl != null) levelControl.EnemyDestroy(price, exp);
+            if (levelControl != null)
+            {
+                levelControl.EnemyDestroy(price, exp);
+                price = 0;
+                exp = 0;
+            }
             enemyViewHP.SetActive(false);
             enemyMovement.EnemyDead();
             Destroy(gameObject, 1.5f);

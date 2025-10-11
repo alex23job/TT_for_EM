@@ -7,6 +7,8 @@ public class SpawnBonus : MonoBehaviour
 
     private GameObject bonus = null;
     private float timer = 1f;
+    private float spawnDelay = 5f;
+    private bool isTaskSpawn = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +25,7 @@ public class SpawnBonus : MonoBehaviour
         }
         else
         {
+            timer = 1f;
             CheckAndSpawnBonus();
         }
     }
@@ -31,7 +34,22 @@ public class SpawnBonus : MonoBehaviour
     {
         if ((numBonus > 0) && (bonus  == null))
         {
-            bonus = Instantiate(prefabBonus, transform.position, Quaternion.identity);
+            if (false == isTaskSpawn)
+            {
+                Invoke("SpawnNewBonus", spawnDelay);
+                isTaskSpawn = true;
+            }
         }
+    }
+
+    private void SpawnNewBonus()
+    {
+        bonus = Instantiate(prefabBonus, transform.position, Quaternion.identity);
+        isTaskSpawn = false;
+    }
+
+    public void SetSpawnDelay(float delay)
+    {
+        spawnDelay = delay;
     }
 }

@@ -93,10 +93,9 @@ public class WavePath
 
             if (countWave >= countRoads) break;
         }
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
         for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]:00}{((arQu[i] >= 0) ? "  " : "")}{((i % sizeCol == (sizeCol - 1)) ? "\n" : " ")}");
-        //for (i = 0; i < arQu.Length; i++) sb.Append($"{arQu[i]} ");
-        Debug.Log(sb.ToString());
+        Debug.Log(sb.ToString());*/
     }
 
     private int GetEndPath()

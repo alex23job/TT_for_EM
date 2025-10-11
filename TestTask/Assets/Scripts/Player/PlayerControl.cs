@@ -11,6 +11,10 @@ public class PlayerControl : MonoBehaviour
 
     private int currentHP;
     private float timer = 0.5f;
+    private int countAptechka = 0;
+
+    public int CurrentHP { get => currentHP; }
+    public bool IsMaxHP { get { return (currentHP == maxHP); }  }
 
     private void Awake()
     {
@@ -55,7 +59,32 @@ public class PlayerControl : MonoBehaviour
             currentHP = 0;
         }
         else currentHP += zn;
+        if ((currentHP < (maxHP / 2)) && (countAptechka > 0))
+        {   //  использование аптечки
+            countAptechka--;
+            currentHP += 20;
+            levelControl.ViewAptechka(countAptechka);
+        }
         ViewHP();
+    }
+
+    public void AddingAptecka()
+    {
+        countAptechka++;
+        ChangeHP(0);
+        levelControl.ViewAptechka(countAptechka);
+    }
+
+    public void AddingStoreAptechka()
+    {
+        countAptechka++;
+        levelControl.SellStory(100);
+    }
+
+    public void SellApple()
+    {
+        ChangeHP(10);
+        levelControl.SellStory(50);
     }
 
     public void AddingMany(int zn)
@@ -68,8 +97,22 @@ public class PlayerControl : MonoBehaviour
         shooting.ChangeEnergy(zn);
     }
 
+    public void SetMaxHP(int newMaxHP)
+    {
+        maxHP = newMaxHP;
+        ChangeHP(0);
+    }
+
     private void ViewHP()
     {
         if (levelControl != null) levelControl.ViewPlayerHP(currentHP);
+    }
+
+    public void ViewStore()
+    {
+        if (levelControl != null)
+        {
+            levelControl.ViewStore();
+        }
     }
 }

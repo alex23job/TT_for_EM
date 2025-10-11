@@ -8,6 +8,14 @@ public class UI_Control : MonoBehaviour
     [SerializeField] private Text txtEnergy;
     [SerializeField] private Text txtHP;
 
+    [SerializeField] private Text txtAptechka;
+    [SerializeField] private GameObject aptechkaPanel;
+
+    [SerializeField] private GameObject storePanel;
+    [SerializeField] private Button btnSellApple;
+    [SerializeField] private Button btnSellAptechka;
+    [SerializeField] private Text txtCold;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +23,7 @@ public class UI_Control : MonoBehaviour
         ViewMany(0);
         ViewEnergy(0);
         ViewHP(0);
+        ViewAptechka(0);
     }
 
     // Update is called once per frame
@@ -41,5 +50,26 @@ public class UI_Control : MonoBehaviour
     public void ViewHP(int hp)
     {
         if (txtHP) txtHP.text = hp.ToString();
+    }
+
+    public void ViewAptechka(int value)
+    {
+        if (value > 0)
+        {
+            aptechkaPanel.SetActive(true);
+            txtAptechka.text = value.ToString();
+        }
+        else
+        {
+            aptechkaPanel.SetActive(false);
+        }
+    }
+
+    public void ViewStore(int gold, bool isMaxHP)
+    {
+        txtCold.text = $"Всего :  {gold}";
+        btnSellAptechka.interactable = (gold >= 100);
+        btnSellApple.interactable = (gold >= 50) && (false == isMaxHP);
+        storePanel.SetActive(true);
     }
 }
