@@ -14,8 +14,10 @@ public class EnemyControl : MonoBehaviour
     private ArmTrigger armTrigger;
     private EnemyHP enemyHP;
     private GameObject enemyViewHP= null;
+    private string enemyName;
 
     public float Radius { get { return radius; } }
+    public string EnemyName { get { return enemyName; } }
 
     private void Awake()
     {
@@ -72,6 +74,7 @@ public class EnemyControl : MonoBehaviour
         radius = ei.Radius;
         damage = ei.Damage;
         price = ei.Price;
+        enemyName = ei.NameEnemy;
         if (ei.NumArm > 0) gameObject.GetComponent<SelectArm>().SelectCurrentArm(ei.NumArm);
         if (armTrigger != null) armTrigger.SetDamage(damage);
     }
@@ -83,7 +86,8 @@ public class EnemyControl : MonoBehaviour
             hp = 0;
             if (levelControl != null)
             {
-                levelControl.EnemyDestroy(price, exp);
+                if (enemyName == "Boss") levelControl.EnemyDestroy(price, exp, true);
+                else levelControl.EnemyDestroy(price, exp);
                 price = 0;
                 exp = 0;
             }

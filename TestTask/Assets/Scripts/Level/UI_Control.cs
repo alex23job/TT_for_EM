@@ -48,6 +48,11 @@ public class UI_Control : MonoBehaviour
         lossPanel.SetActive(true);
     }
 
+    public void ViewWinPanel()
+    {
+        winPanel.SetActive(true);
+    }
+
     public void ViewExp(int exp)
     {
         if (txtExp != null) txtExp.text = exp.ToString();

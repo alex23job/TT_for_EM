@@ -23,13 +23,17 @@ public class LevelControl : MonoBehaviour
         
     }
 
-    public void EnemyDestroy(int price, int exp)
+    public void EnemyDestroy(int price, int exp, bool isBoss = false)
     {
         currentExp += exp;
         CheckCurrentPlayerLevel();
         if (ui_Control !=null) ui_Control.ViewExp(currentExp);
         currentMany += price;
         if (ui_Control != null) ui_Control.ViewMany(currentMany);
+        if (isBoss)
+        {
+
+        }
     }
 
     public void CheckCurrentPlayerLevel()

@@ -131,7 +131,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             enemy.transform.localScale = enemy.transform.localScale * 1.3f;
             timer = 300f;
-            enemyInfo = new EnemyInfo("Boss", 500, 50, 1000, 1000, 3, 3);
+            //enemyInfo = new EnemyInfo("Boss", 200, 50, 1000, 1000, 3, 3);
             enemy.GetComponent<EnemyControl>().SetParams(levelControl, enemyInfo);
         }
         //print($"Enemy spawn position = <{enemy.transform.position}> (rot=<{enemy.transform.rotation.eulerAngles}>)     point[0] = <{path[0]}>");
