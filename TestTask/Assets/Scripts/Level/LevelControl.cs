@@ -85,8 +85,8 @@ public class LevelControl : MonoBehaviour
         return playerControl;
     }
 
-    public void ViewLossPanel()
+    public void ViewLossPanel(string reason)
     {
-        ui_Control.ViewLossPanel();
+        ui_Control.ViewLossPanel(reason);
     }
 }

@@ -18,6 +18,7 @@ public class UI_Control : MonoBehaviour
     [SerializeField] private Text txtCold;
 
     [SerializeField] private GameObject lossPanel;
+    [SerializeField] private Text txtDefeatReason;
     [SerializeField] private GameObject winPanel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,8 +42,9 @@ public class UI_Control : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void ViewLossPanel()
+    public void ViewLossPanel(string defeatReason)
     {
+        txtDefeatReason.text = defeatReason;
         lossPanel.SetActive(true);
     }
 

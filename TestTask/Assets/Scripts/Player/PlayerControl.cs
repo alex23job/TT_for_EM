@@ -59,7 +59,7 @@ public class PlayerControl : MonoBehaviour
             currentHP = 0;
             PlayerMovement playerMovement = gameObject.GetComponent<PlayerMovement>();
             if (playerMovement != null) playerMovement.PlayerLoss();
-            levelControl.ViewLossPanel();
+            Invoke("ViewLossPanel", 2f);
         }
         else currentHP += zn;
         if ((currentHP < (maxHP / 2)) && (countAptechka > 0))
@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour
 
     public void ViewLossPanel()
     {
-        if (levelControl != null) levelControl.ViewLossPanel();
+        if (levelControl != null) levelControl.ViewLossPanel("Ваш защитник убит !!!");
     }
 
     public void AddingAptecka()

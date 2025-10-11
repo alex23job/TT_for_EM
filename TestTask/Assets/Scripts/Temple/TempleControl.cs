@@ -4,6 +4,8 @@ public class TempleControl : MonoBehaviour
 {
     //private Animator _animDoorLeft, _animDoorRight;
 
+    private LevelControl levelControl = null;
+
     private int maxTempleHP = 1000;
     private int templeHP = 1000;
 
@@ -48,6 +50,11 @@ public class TempleControl : MonoBehaviour
             count %= 4;
             //print(count);
         }*/
+    }
+
+    public void SetLevelControl()
+    {
+        if (levelControl != null) levelControl.ViewLossPanel("Ваш замок разрушен !!!");
     }
 
     public void ChangeHP(int zn)
