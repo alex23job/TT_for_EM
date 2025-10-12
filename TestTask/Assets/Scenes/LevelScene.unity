@@ -24190,7 +24190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1684873811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30889,6 +30889,10 @@ PrefabInstance:
     - target: {fileID: 5282525498010991140, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
       propertyPath: m_Name
       value: EnemyWarior
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282525498010991140, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8223639923453993802, guid: b7fd98f5a30b1db4a9476739a937e4eb, type: 3}
       propertyPath: m_LocalScale.y

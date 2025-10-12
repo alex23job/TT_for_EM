@@ -42,7 +42,10 @@ public class BoardMap : MonoBehaviour
         spawnBonuses.Clear();
         spawnBonuses.AddRange(tailBonSpawn);
 
-        print($"spawnEnemies={spawnEnemies.Count}  spawnBonuses={spawnBonuses.Count}");
+        TempleControl templeControl = board.transform.GetComponentInChildren<TempleControl>();
+        if (templeControl != null) templeControl.SetLevelControl(gameObject.GetComponent<LevelControl>());
+
+        print($"spawnEnemies={spawnEnemies.Count}  spawnBonuses={spawnBonuses.Count}  Temple HP={templeControl.TempleHP}");
     }
 
     private void CreatePole()

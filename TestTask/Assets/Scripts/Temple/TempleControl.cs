@@ -12,6 +12,8 @@ public class TempleControl : MonoBehaviour
     private float timer = 1f;
     //private int count = 0;
 
+    public int TempleHP { get => templeHP; }
+
     private void Awake()
     {
         //_animDoorLeft = transform.GetChild(1).GetComponent<Animator>();
@@ -52,9 +54,9 @@ public class TempleControl : MonoBehaviour
         }*/
     }
 
-    public void SetLevelControl()
+    public void SetLevelControl(LevelControl control)
     {
-        if (levelControl != null) levelControl.ViewLossPanel("Ваш замок разрушен !!!");
+        this.levelControl = control;
     }
 
     public void ChangeHP(int zn)
@@ -64,6 +66,7 @@ public class TempleControl : MonoBehaviour
         {   //  наш замок разрушен !!!
             templeHP = 0;
             Destroy(gameObject);
+            if (levelControl != null) levelControl.ViewLossPanel("Ваш замок разрушен !!!");
         }
         else templeHP += zn;
 

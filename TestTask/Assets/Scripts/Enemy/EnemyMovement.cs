@@ -1,6 +1,7 @@
 //using NUnit.Framework;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -75,6 +76,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Attack(Transform targetAttack, int damage)
     {
+        print($"targetAttack name={targetAttack.name}  tag={targetAttack.tag}");
         Vector3 direction = targetAttack.position - transform.position;
         direction.y = 0;
         if (targetAttack.CompareTag("Player"))
@@ -91,7 +93,21 @@ public class EnemyMovement : MonoBehaviour
         }
         if (targetAttack.CompareTag("Temple"))
         {
-            BoxCollider box = targetAttack.GetComponent<BoxCollider>();
+            print($"Temple dist={direction.magnitude} dir={direction}");
+            if (direction.magnitude < 2.9f)
+            {
+                isAttack = true;
+                transform.rotation = Quaternion.LookRotation(direction);
+                anim.SetBool("IsAttack", true);
+                Invoke("EndAttack", 0.5f);
+            }
+            else
+            {
+                rb.MovePosition(transform.position + direction.normalized * movementSpeed * 0.1f);
+                if (false == isMove) transform.rotation = Quaternion.LookRotation(direction);
+                anim.SetBool("IsWalk", true);
+            }
+            /*BoxCollider box = targetAttack.GetComponent<BoxCollider>();
             
             if (box != null)
             {
@@ -99,7 +115,8 @@ public class EnemyMovement : MonoBehaviour
                 Vector3 dir;
                 float distance;
                 Physics.ComputePenetration(capsule, transform.position, transform.rotation, box, box.transform.position, box.transform.rotation, out dir, out distance);
-                if (distance < 0.5f)
+                print($"enPos={transform.position} temlePos={box.transform.position} dir={dir} dist={distance}");
+                if (distance < 1f)
                 {
                     isAttack = true;
                     transform.rotation = Quaternion.LookRotation(direction);
@@ -110,7 +127,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     rb.MovePosition(transform.position + dir.normalized * movementSpeed * Time.deltaTime);
                 }
-            }
+            }*/
         }
     }
 

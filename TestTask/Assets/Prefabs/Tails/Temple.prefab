@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 6604805711764445207}
   - component: {fileID: 2015603281641426360}
   - component: {fileID: 7391624752303445308}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TempleSupport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
