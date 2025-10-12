@@ -90,6 +90,12 @@ public class EnemyMovement : MonoBehaviour
                 anim.SetBool("IsAttack", true);
                 Invoke("EndAttack", 0.5f);
             }
+            else
+            {
+                rb.MovePosition(transform.position + direction.normalized * movementSpeed * 0.05f);
+                if (false == isMove) transform.rotation = Quaternion.LookRotation(direction);
+                anim.SetBool("IsWalk", true);
+            }
         }
         if (targetAttack.CompareTag("Temple"))
         {

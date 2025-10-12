@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     bool isLoss = false;
 
     private float timer = 1f;
+    private float runStart = 0;
     private float myVelocity = 0;
 
     private int curArm = 0;
@@ -51,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             //anim.SetFloat("WalkSpeed", rb.linearVelocity.magnitude * 1000);
             if (isAttack)
             {
-                anim.SetBool("IsWalk", false);
+                anim.SetBool("IsWalk", false);                
                 Attack();
             }
             else if (isJump)
@@ -62,7 +63,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (myVelocity > 0.2f)
                 {
-                    if (!isAttack) anim.SetBool("IsWalk", true);
+                    if (!isAttack)
+                    {
+                        anim.SetBool("IsWalk", true);
+                        print($"myVelocity = {myVelocity}");
+                        if (myVelocity > 20f)
+                        {
+                            //anim.SetBool("IsWalk", false);
+                            anim.SetBool("IsRun", true);
+                        }
+                        else
+                        {
+                            anim.SetBool("IsRun", false);
+                        }
+                    }
                 }
                 else
                 {
@@ -104,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttack = true;
+            Attack();
         }
     }
     // Update is called once per frame
@@ -123,11 +138,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack()
     {
+        anim.SetBool("IsRun", false);
         anim.SetBool("IsWalk", false);
         anim.SetBool("IsJump", false);
         anim.SetBool("IsAttack", true);
             
-        Invoke("EndAttack", 0.5f);
+        Invoke("EndAttack", 0.7f);
     }
 
     private void EndAttack()
@@ -139,17 +155,17 @@ public class PlayerMovement : MonoBehaviour
     private void Move(float input)
     {
         if (isAttack) return;
-        //if (input > 0.99f) runStart += Time.deltaTime;
-        //else runStart = 0;
+        if (Mathf.Abs(input) > 0.99f) runStart += Time.deltaTime;
+        else runStart = 0;
         //if (runStart < 3f) input = (input > 0.95f) ? 0.9f : input;
         float mult = 1f;
-        //if (runStart >= 3f) mult = 2f;
+        if (runStart >= 2f) mult = 2.5f;
         //transform.Translate(Vector3.forward * input * moveSpeed * mult * Time.fixedDeltaTime);//Можно добавить Time.DeltaTime
         movement = transform.forward * ver; // + transform.right * hor * 0.1f;
         //movement = Vector3.forward * ver + Vector3.right * hor * 0.1f;
         rb.AddForce(movement * mult * moveSpeed);
         //myVelocity += rb.linearVelocity.magnitude * 1000;
-        myVelocity += movement.magnitude * 2;
+        myVelocity += movement.magnitude * mult;
         //print($"speed = {rb.linearVelocity.magnitude * 1000}");
         //anim.SetFloat("WalkSpeed", rb.linearVelocity.magnitude * 1000);
         //rb.AddForce(transform.forward * input * moveSpeed * mult * Time.fixedDeltaTime);
