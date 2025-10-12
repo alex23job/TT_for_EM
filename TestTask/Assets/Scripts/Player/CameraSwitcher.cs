@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    [SerializeField] private Camera startCamera; // Стартовая камера
     [SerializeField] private Camera isoCamera; // Изометрическая камера
     [SerializeField] private Camera thirdPersonCamera; // Камера от третьего лица
     public KeyCode switchKey = KeyCode.Tab; // Клавиша для переключения
@@ -12,8 +13,9 @@ public class CameraSwitcher : MonoBehaviour
 
     void Start()
     {
+        startCamera.enabled = true;
         // Изначально активируем изометрическую камеру
-        isoCamera.enabled = true;
+        isoCamera.enabled = false;
         thirdPersonCamera.enabled = false;
     }
 
@@ -29,5 +31,19 @@ public class CameraSwitcher : MonoBehaviour
             thirdPersonCamera.enabled = !useIsoCamera;
             print($"useIsoCamera = {useIsoCamera}");
         }
+    }
+
+    public void BeginGame()
+    {
+        isoCamera.enabled = false;
+        thirdPersonCamera.enabled = false;
+        Invoke("OnCamera", 2f);
+    }
+
+    private void OnCamera()
+    {
+        // Изначально активируем изометрическую камеру
+        isoCamera.enabled = true;
+        thirdPersonCamera.enabled = false;
     }
 }
