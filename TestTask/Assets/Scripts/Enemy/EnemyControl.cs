@@ -9,9 +9,12 @@ public class EnemyControl : MonoBehaviour
     private int price;
     private int exp;
     private float radius = 1.5f;
+    private int numArm = 0;
+    //private bool isAttackSound = false;
     private LevelControl levelControl;
     private EnemyMovement enemyMovement;
     private ArmTrigger armTrigger;
+    //private PlaySounds playSounds;
     private EnemyHP enemyHP;
     private GameObject enemyViewHP= null;
     private string enemyName;
@@ -24,6 +27,7 @@ public class EnemyControl : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         armTrigger = GetComponentInChildren<ArmTrigger>();
         enemyHP = GetComponentInChildren<EnemyHP>();
+        //playSounds = GetComponent<PlaySounds>();
         enemyViewHP = transform.GetChild(0).gameObject;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,7 +54,21 @@ public class EnemyControl : MonoBehaviour
 
     public void Attack(Transform target)
     {
-        if (enemyMovement != null) enemyMovement.Attack(target, damage);
+        if (enemyMovement != null)
+        {
+            enemyMovement.Attack(target, damage, numArm);
+            /*if (false == isAttackSound)
+            {
+                isAttackSound = true;
+                playSounds.PlayKick(numArm);
+                Invoke("ResetIsAttackSound", 1f);
+            }*/
+        }
+    }
+
+    private void ResetIsAttackSound()
+    {
+        //isAttackSound = false;
     }
 
     public void SetParams(LevelControl lc, int hp, int dmg, int rad, int prc, int exp)
@@ -75,6 +93,7 @@ public class EnemyControl : MonoBehaviour
         damage = ei.Damage;
         price = ei.Price;
         enemyName = ei.NameEnemy;
+        numArm = ei.NumArm;
         if (ei.NumArm > 0) gameObject.GetComponent<SelectArm>().SelectCurrentArm(ei.NumArm);
         if (armTrigger != null) armTrigger.SetDamage(damage);
     }
@@ -94,6 +113,7 @@ public class EnemyControl : MonoBehaviour
             enemyViewHP.SetActive(false);
             enemyMovement.EnemyDead();
             Destroy(gameObject, 1.5f);
+            //playSounds.PlayClip(0);
         }
         else
         {

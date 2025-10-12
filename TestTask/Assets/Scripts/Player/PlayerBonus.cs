@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerBonus : MonoBehaviour
 {
     private PlayerControl playerControl;
+    private PlaySounds playSounds;
 
     private void Awake()
     {
         playerControl = GetComponent<PlayerControl>();
+        playSounds = GetComponent<PlaySounds>();
     }
 
     // Start is called before the first frame update
@@ -38,15 +40,19 @@ public class PlayerBonus : MonoBehaviour
                 {
                     case 0:
                         GetArm(bonus);
+                        playSounds.PlayClip(4);
                         break;
                     case 1:
                         playerControl.AddingMany(bonus.Value);
+                        playSounds.PlayClip(5);
                         break;
                     case 2:
                         playerControl.ChangeHP(bonus.Value);
+                        playSounds.PlayClip(0);
                         break;
                     case 3:
                         playerControl.AddingAptecka();
+                        playSounds.PlayClip(1);
                         break;
                 }
                 bonus.MinAndDestroy();

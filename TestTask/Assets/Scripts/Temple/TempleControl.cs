@@ -64,9 +64,9 @@ public class TempleControl : MonoBehaviour
         if (templeHP + zn > maxTempleHP) templeHP = maxTempleHP;
         else if (templeHP + zn < 0)
         {   //  наш замок разрушен !!!
-            templeHP = 0;
-            Destroy(gameObject);
+            templeHP = 0;            
             if (levelControl != null) levelControl.ViewLossPanel("Ваш замок разрушен !!!");
+            Destroy(gameObject, 0.1f);
         }
         else
         {

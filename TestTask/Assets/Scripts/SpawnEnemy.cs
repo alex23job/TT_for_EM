@@ -19,10 +19,15 @@ public class SpawnEnemy : MonoBehaviour
     private Vector2 delta = Vector2.zero;
     private LevelControl levelControl = null;
     private bool isBoss = false;
+    private PlaySounds playSounds = null;
 
     public Vector3 SpawnPos { get => spawnPosition; }
     public bool IsBossSpawn { get => isBoss; }
 
+    private void Awake()
+    {
+        playSounds = gameObject.GetComponent<PlaySounds>();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -130,7 +135,7 @@ public class SpawnEnemy : MonoBehaviour
         if (isBoss)
         {
             enemy.transform.localScale = enemy.transform.localScale * 1.3f;
-            timer = 300f;
+            timer = 600f;
             //enemyInfo = new EnemyInfo("Boss", 200, 50, 1000, 1000, 3, 3);
             enemy.GetComponent<EnemyControl>().SetParams(levelControl, enemyInfo);
         }
@@ -138,6 +143,7 @@ public class SpawnEnemy : MonoBehaviour
         enemy.GetComponent<EnemyMovement>().SetPath(path, isPatrouille);
         enemy.GetComponent<SelectArm>().SetArmDamage(new int[] { 2, 4, 7, 10 });
         enemy.GetComponent<EnemyControl>().SetParams(levelControl, enemyInfo);
+        playSounds.PlayClip(0);
     }
 
     private void OnTriggerEnter(Collider other)

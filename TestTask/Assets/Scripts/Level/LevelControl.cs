@@ -5,6 +5,8 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private UI_Control ui_Control;
     [SerializeField] private PlayerControl playerControl;
 
+    private PlaySounds playSounds;
+
     private int currentMany = 0;
     private int currentExp = 0;
     private int currentPlayerLevel = 0;
@@ -14,7 +16,7 @@ public class LevelControl : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playSounds = gameObject.GetComponent<PlaySounds>();        
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class LevelControl : MonoBehaviour
         if (isBoss)
         {
             ui_Control.ViewWinPanel();
+            playSounds.PlayClip(0);
         }
     }
 
@@ -96,6 +99,7 @@ public class LevelControl : MonoBehaviour
 
     public void ViewLossPanel(string reason)
     {
+        playSounds.PlayClip(1);
         ui_Control.ViewLossPanel(reason);
     }
 }

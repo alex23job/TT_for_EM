@@ -20,18 +20,22 @@ public class PlayerMovement : MonoBehaviour
     private float myVelocity = 0;
 
     private int curArm = 0;
+    private SelectArm selectArm;
+    private PlaySounds playSounds;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        selectArm = GetComponent<SelectArm>();
+        playSounds = GetComponent<PlaySounds>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameObject.GetComponent<SelectArm>().SetArmDamage(new int[] { 5, 10, 20 });
+        if (selectArm != null) selectArm.SetArmDamage(new int[] { 5, 10, 20 });
     }
 
     // Update is called once per frame
@@ -118,6 +122,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttack = true;
+            
+            curArm = selectArm.ArmIndex;
+            playSounds.PlayKick(curArm);
+
             Attack();
         }
     }
@@ -143,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("IsJump", false);
         anim.SetBool("IsAttack", true);
             
-        Invoke("EndAttack", 0.7f);
+        Invoke("EndAttack", 0.6f);
     }
 
     private void EndAttack()

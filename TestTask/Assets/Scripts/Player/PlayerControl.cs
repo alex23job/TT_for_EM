@@ -6,12 +6,15 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private int recoverableEnergy = 1;
     [SerializeField] private int maxHP = 100;
     [SerializeField] private LevelControl levelControl;
+    
+    private PlaySounds playSounds;
 
     private PlayerShooting shooting;
 
     private int currentHP;
     private float timer = 0.5f;
     private int countAptechka = 0;
+    private bool isLoss = false;
 
     public int CurrentHP { get => currentHP; }
     public bool IsMaxHP { get { return (currentHP == maxHP); }  }
@@ -19,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         shooting = GetComponent<PlayerShooting>();
+        playSounds = GetComponent<PlaySounds>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,12 +64,17 @@ public class PlayerControl : MonoBehaviour
             PlayerMovement playerMovement = gameObject.GetComponent<PlayerMovement>();
             if (playerMovement != null) playerMovement.PlayerLoss();
             Invoke("ViewLossPanel", 2f);
+            if (false == isLoss)
+            {
+                isLoss = true;
+                playSounds.PlayClip(8);
+            }
         }
         else currentHP += zn;
         if ((currentHP < (maxHP / 2)) && (countAptechka > 0))
         {   //  использование аптечки
             countAptechka--;
-            currentHP += 20;
+            currentHP += 30;
             levelControl.ViewAptechka(countAptechka);
         }
         ViewHP();
@@ -81,6 +90,7 @@ public class PlayerControl : MonoBehaviour
         countAptechka++;
         ChangeHP(0);
         levelControl.ViewAptechka(countAptechka);
+        playSounds.PlayClip(1);
     }
 
     public void AddingStoreAptechka()
@@ -92,7 +102,8 @@ public class PlayerControl : MonoBehaviour
     public void SellApple()
     {
         ChangeHP(10);
-        levelControl.SellStory(50);
+        levelControl.SellStory(30);
+        playSounds.PlayClip(0);
     }
 
     public void AddingMany(int zn)

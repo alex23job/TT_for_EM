@@ -12,6 +12,8 @@ public class SelectArm : MonoBehaviour
     private bool isPlayerArm = false;
     private bool[] playerArm;
 
+    public int ArmIndex { get => currentArmIndex; }
+
     // Start is called before the first frame update
     void Start()
     {

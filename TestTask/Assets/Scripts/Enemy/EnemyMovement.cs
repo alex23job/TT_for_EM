@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 target;
     private bool isMove = false;
     private bool isAttack = false;
+    private bool isDead = false;
 
     private List<Vector3> points = new List<Vector3>();
     private int curIndex = 0;
@@ -20,12 +21,14 @@ public class EnemyMovement : MonoBehaviour
 
     private Animator anim;
     CapsuleCollider capsule;
+    private PlaySounds playSounds;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         capsule = GetComponent<CapsuleCollider>();
+        playSounds = GetComponent<PlaySounds>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,21 +63,19 @@ public class EnemyMovement : MonoBehaviour
         //else anim.SetBool("IsWalk", false);
     }
 
-    /*void NextWaypoint()
-    {
-        // Переходим к следующей точке
-        currentWaypointIndex = (currentWaypointIndex + 1) % points.Count;
-        target = points[curIndex];
-    }*/
-
     public void EnemyDead()
     {
         anim.SetBool("IsWalk", false);
         anim.SetBool("IsAttack", false);
         anim.SetBool("IsDead", true);
+        if (false == isDead)
+        {
+            isDead = true;
+            playSounds.PlayClip(0);
+        }
     }
 
-    public void Attack(Transform targetAttack, int damage)
+    public void Attack(Transform targetAttack, int damage, int numArm)
     {
         //print($"targetAttack name={targetAttack.name}  tag={targetAttack.tag}");
         Vector3 direction = targetAttack.position - transform.position;
@@ -84,11 +85,13 @@ public class EnemyMovement : MonoBehaviour
             //print($"dir={direction}({direction.magnitude})  rot={Quaternion.LookRotation(direction)}");
             if (direction.magnitude < 1.3f)
             {
+                if (false == isAttack) playSounds.PlayKick(numArm);
                 isAttack = true;
                 transform.rotation = Quaternion.LookRotation(direction);
                 anim.SetBool("IsWalk", false);
                 anim.SetBool("IsAttack", true);
                 Invoke("EndAttack", 0.5f);
+                
             }
             else
             {
@@ -102,10 +105,12 @@ public class EnemyMovement : MonoBehaviour
             //print($"Temple dist={direction.magnitude} dir={direction}");
             if (direction.magnitude < 2.9f)
             {
+                if (false == isAttack) playSounds.PlayKick(numArm);
                 isAttack = true;
                 transform.rotation = Quaternion.LookRotation(direction);
                 anim.SetBool("IsAttack", true);
                 Invoke("EndAttack", 0.5f);
+                
             }
             else
             {
