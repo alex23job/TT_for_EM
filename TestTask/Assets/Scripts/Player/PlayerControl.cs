@@ -85,7 +85,7 @@ public class PlayerControl : MonoBehaviour
 
     public void AddingStoreAptechka()
     {
-        countAptechka++;
+        AddingAptecka();
         levelControl.SellStory(100);
     }
 

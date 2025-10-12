@@ -97,8 +97,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            curArm++; curArm %= 3;
-            gameObject.GetComponent<SelectArm>().SelectCurrentArm(curArm);
+            //curArm++; curArm %= 3;
+            //gameObject.GetComponent<SelectArm>().SelectCurrentArm(curArm);
+            gameObject.GetComponent<SelectArm>().NextArm();
         }
         if (Input.GetButtonDown("Fire1"))
         {

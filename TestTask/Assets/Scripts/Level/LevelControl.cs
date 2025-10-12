@@ -32,7 +32,7 @@ public class LevelControl : MonoBehaviour
         if (ui_Control != null) ui_Control.ViewMany(currentMany);
         if (isBoss)
         {
-
+            ui_Control.ViewWinPanel();
         }
     }
 
@@ -70,6 +70,11 @@ public class LevelControl : MonoBehaviour
     public void ViewAptechka(int count)
     {
         if (ui_Control != null) ui_Control.ViewAptechka(count);
+    }
+
+    public void ViewTempleHP(int value)
+    {
+        if (ui_Control != null) ui_Control.ViewTempleHP(value);
     }
 
     public void ViewStore()

@@ -12,6 +12,9 @@ public class UI_Control : MonoBehaviour
     [SerializeField] private Text txtAptechka;
     [SerializeField] private GameObject aptechkaPanel;
 
+    [SerializeField] private Text txtTempleHP;
+    [SerializeField] private GameObject templePanel;
+
     [SerializeField] private GameObject storePanel;
     [SerializeField] private Button btnSellApple;
     [SerializeField] private Button btnSellAptechka;
@@ -29,6 +32,7 @@ public class UI_Control : MonoBehaviour
         ViewEnergy(0);
         ViewHP(0);
         ViewAptechka(0);
+        ViewTempleHP(0);
     }
 
     // Update is called once per frame
@@ -71,6 +75,19 @@ public class UI_Control : MonoBehaviour
     public void ViewHP(int hp)
     {
         if (txtHP) txtHP.text = hp.ToString();
+    }
+
+    public void ViewTempleHP(int value)
+    {
+        if (value > 0)
+        {
+            templePanel.SetActive(true);
+            txtTempleHP.text = value.ToString();
+        }
+        else
+        {
+            templePanel.SetActive(false);
+        }
     }
 
     public void ViewAptechka(int value)

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 549050433826137217}
   m_Layer: 0
   m_Name: AxeBody
-  m_TagString: Untagged
+  m_TagString: Bonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2412124682863435698}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5735764, y: -0, z: -0, w: 0.8191521}
+  m_LocalRotation: {x: 0.69465834, y: 0, z: 0, w: 0.71933985}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1891565040617352300}
-  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 88, y: 0, z: 0}
 --- !u!33 &4226191711691850065
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -138,6 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1891565040617352300}
+  - component: {fileID: 580518114685132451}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -161,3 +162,17 @@ Transform:
   - {fileID: 7484467372913771504}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &580518114685132451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611916869808492396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db347ff78c29f2f4c83349be5b4501d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonusType: 0
+  value: 7

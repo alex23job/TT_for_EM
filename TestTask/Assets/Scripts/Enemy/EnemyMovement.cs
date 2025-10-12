@@ -76,7 +76,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Attack(Transform targetAttack, int damage)
     {
-        print($"targetAttack name={targetAttack.name}  tag={targetAttack.tag}");
+        //print($"targetAttack name={targetAttack.name}  tag={targetAttack.tag}");
         Vector3 direction = targetAttack.position - transform.position;
         direction.y = 0;
         if (targetAttack.CompareTag("Player"))
@@ -93,7 +93,7 @@ public class EnemyMovement : MonoBehaviour
         }
         if (targetAttack.CompareTag("Temple"))
         {
-            print($"Temple dist={direction.magnitude} dir={direction}");
+            //print($"Temple dist={direction.magnitude} dir={direction}");
             if (direction.magnitude < 2.9f)
             {
                 isAttack = true;

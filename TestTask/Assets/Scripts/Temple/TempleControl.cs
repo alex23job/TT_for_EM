@@ -68,7 +68,10 @@ public class TempleControl : MonoBehaviour
             Destroy(gameObject);
             if (levelControl != null) levelControl.ViewLossPanel("Ваш замок разрушен !!!");
         }
-        else templeHP += zn;
-
+        else
+        {
+            templeHP += zn; 
+        }
+        if (levelControl != null) levelControl.ViewTempleHP(templeHP);        
     }
 }

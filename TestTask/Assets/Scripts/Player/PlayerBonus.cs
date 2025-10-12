@@ -33,9 +33,12 @@ public class PlayerBonus : MonoBehaviour
             //print($"PC=<{playerControl}>   bonus=<{bonus}>");
             if ((playerControl != null) && (bonus != null))
             {
-                print($"Bonus type={bonus.BonusType} value={bonus.Value}");
+                //print($"Bonus type={bonus.BonusType} value={bonus.Value}");
                 switch(bonus.BonusType)
                 {
+                    case 0:
+                        GetArm(bonus);
+                        break;
                     case 1:
                         playerControl.AddingMany(bonus.Value);
                         break;
@@ -52,6 +55,22 @@ public class PlayerBonus : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
+        }
+    }
+
+    private void GetArm(Bonus bonus)
+    {
+        print($"bonus name={bonus.name}");
+        SelectArm selectArm = gameObject.GetComponent<SelectArm>();
+        if (bonus.name == "Axe")
+        {
+            selectArm.SetAvailableArm(1);
+            selectArm.SelectCurrentArm(1);
+        }
+        if (bonus.name == "Mace")
+        {
+            selectArm.SetAvailableArm(2);
+            selectArm.SelectCurrentArm(2);
         }
     }
 }
