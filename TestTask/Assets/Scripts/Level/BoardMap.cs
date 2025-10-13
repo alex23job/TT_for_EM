@@ -99,7 +99,7 @@ public class BoardMap : MonoBehaviour
             else
             {
                 spawn.SetPrefab(prefabEnemy, new EnemyInfo("Воин с молотом", 10, 2, 10, 10, 2, 2));
-                spawn.SetDelaySpawn(10f);
+                spawn.SetDelaySpawn(7f);
             }
         }
     }

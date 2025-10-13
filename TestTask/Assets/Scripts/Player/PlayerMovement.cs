@@ -41,8 +41,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //hor = UnityEngine.Input.GetAxis("Horizontal");
-        //ver = UnityEngine.Input.GetAxis("Vertical");
         if (timer > 0f) timer -= Time.deltaTime;
         else
         {
@@ -53,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
             
-            //anim.SetFloat("WalkSpeed", rb.linearVelocity.magnitude * 1000);
             if (isAttack)
             {
                 anim.SetBool("IsWalk", false);                
@@ -70,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
                     if (!isAttack)
                     {
                         anim.SetBool("IsWalk", true);
-                        print($"myVelocity = {myVelocity}");
+                        //print($"myVelocity = {myVelocity}");
                         if (myVelocity > 20f)
                         {
                             //anim.SetBool("IsWalk", false);
@@ -88,25 +85,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            /*if (myVelocity < 0.2f)
-            {
-                anim.SetBool("IsWalk", false);
-                //anim.SetBool("IsStop", false);
-                anim.SetBool("IsRun", false);
-            }
-            else if (myVelocity < 10f)
-            {
-                anim.SetBool("IsWalk", true);
-                anim.SetBool("IsRun", false);
-            }
-            else
-            {
-                anim.SetBool("IsRun", true);
-                //anim.SetBool("IsStop", true);
-                anim.SetBool("IsWalk", false);
-            }*/
-            //anim.SetFloat("WalkSpeed", myVelocity);
-            //print($"myVelocity = {myVelocity}");
             myVelocity = 0;
         }
         if (Input.GetKeyDown(KeyCode.Space))
@@ -115,8 +93,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            //curArm++; curArm %= 3;
-            //gameObject.GetComponent<SelectArm>().SelectCurrentArm(curArm);
             gameObject.GetComponent<SelectArm>().NextArm();
         }
         if (Input.GetButtonDown("Fire1"))
@@ -134,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
     {
         hor = UnityEngine.Input.GetAxis("Horizontal");
         ver = UnityEngine.Input.GetAxis("Vertical");
-        //rb.AddForce(movement, ForceMode.Impulse);
         Move(ver);
         Turn(hor);
     }
@@ -168,33 +143,17 @@ public class PlayerMovement : MonoBehaviour
         //if (runStart < 3f) input = (input > 0.95f) ? 0.9f : input;
         float mult = 1f;
         if (runStart >= 2f) mult = 2.5f;
-        //transform.Translate(Vector3.forward * input * moveSpeed * mult * Time.fixedDeltaTime);//Можно добавить Time.DeltaTime
-        movement = transform.forward * ver; // + transform.right * hor * 0.1f;
-        //movement = Vector3.forward * ver + Vector3.right * hor * 0.1f;
+        movement = transform.forward * ver;
         rb.AddForce(movement * mult * moveSpeed);
-        //myVelocity += rb.linearVelocity.magnitude * 1000;
         myVelocity += movement.magnitude * mult;
-        //print($"speed = {rb.linearVelocity.magnitude * 1000}");
-        //anim.SetFloat("WalkSpeed", rb.linearVelocity.magnitude * 1000);
-        //rb.AddForce(transform.forward * input * moveSpeed * mult * Time.fixedDeltaTime);
-        //anim.SetFloat("speed", Mathf.Abs(input));
     }
 
     private void Turn(float input)
     {
         if (isAttack) return;
-        // Плавный поворот в сторону движения
-        //if (movement != Vector3.zero)
-        //{
-        //    Quaternion targetRotation = Quaternion.LookRotation(movement);
-        //    //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSmoothness * Time.deltaTime);
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSmoothness);
-        //}
 
-        //rb.MoveRotation(rb.rotation * Quaternion.Euler(0, movement.y * _rotationSmoothness * Time.fixedDeltaTime, 0));
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0, input * _rotationSmoothness, 0));
         if (ver == 0) myVelocity += Mathf.Abs(input);
-        //transform.Rotate(0, input * _rotationSmoothness * Time.deltaTime, 0);
     }
     public void OnJump()
     {

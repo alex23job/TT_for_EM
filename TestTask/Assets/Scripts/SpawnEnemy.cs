@@ -115,7 +115,7 @@ public class SpawnEnemy : MonoBehaviour
 
     public void SetDelaySpawn(float delay)
     {
-        spawnDelay = delay;
+        spawnDelay = delay + numberEnemyArm;
         //timer = spawnDelay;
         timer = 0.25f;
     }
