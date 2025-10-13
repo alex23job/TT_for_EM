@@ -107,7 +107,7 @@ public class UI_Control : MonoBehaviour
     {
         txtCold.text = $"Всего :  {gold}";
         btnSellAptechka.interactable = (gold >= 100);
-        btnSellApple.interactable = (gold >= 50) && (false == isMaxHP);
+        btnSellApple.interactable = (gold >= 30) && (false == isMaxHP);
         storePanel.SetActive(true);
     }
 }
