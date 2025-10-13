@@ -11,6 +11,7 @@ public class BoardMap : MonoBehaviour
     [SerializeField] private int countRow;
     [SerializeField] private float offsetX;
     [SerializeField] private float offsetZ;
+    [SerializeField] private int[] numsEndPathPoints;
 
     private List<SpawnEnemy> spawnEnemies = new List<SpawnEnemy>();
     private List<SpawnBonus> spawnBonuses = new List<SpawnBonus>();
@@ -119,6 +120,7 @@ public class BoardMap : MonoBehaviour
         x = Mathf.RoundToInt((spawnPos.x - offsetX) / 2);
         y = Mathf.RoundToInt((offsetZ - spawnPos.z) / 2);
         int[] ends = new int[4] { 32, 35, 50, 53 };
+        if (numsEndPathPoints != null && numsEndPathPoints.Length > 0) ends = numsEndPathPoints;
         print($"startPos={countCol * y + x} (x={x}, y={y})");
         WavePath wavePath = new WavePath();
         path = wavePath.GetPath(countCol * y + x, ends, pole, countRow, countCol);

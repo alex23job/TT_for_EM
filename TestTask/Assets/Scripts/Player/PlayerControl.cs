@@ -83,6 +83,7 @@ public class PlayerControl : MonoBehaviour
     public void ViewLossPanel()
     {
         if (levelControl != null) levelControl.ViewLossPanel("Ваш защитник убит !!!");
+        Destroy(gameObject, 1.5f);
     }
 
     public void AddingAptecka()
