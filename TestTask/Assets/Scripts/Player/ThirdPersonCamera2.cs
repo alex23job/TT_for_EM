@@ -12,23 +12,6 @@ public class ThirdPersonCamera2 : MonoBehaviour
     public float collisionCheckDistance = 1f; // Расстояние для проверки столкновений
     public LayerMask obstacleLayer; // Слой, на котором находятся препятствия
 
-    /*void LateUpdate()
-    {
-        // Если целевого объекта нет, заканчиваем работу
-        if (target == null) return;
-
-        // Рассчитываем позицию камеры
-        //Vector3 targetDir = target.TransformDirection(Vector3.back); // Направление, противоположное движению персонажа
-        Vector3 targetDir = target.TransformDirection(Vector3.forward); // Направление движения персонажа
-        Vector3 desiredPosition = target.position + targetDir * offsetZ + Vector3.up * offsetY;
-
-        // Медленно перемещаем камеру к новому положению
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothness);
-
-        // Наводим камеру на персонажа
-        transform.LookAt(target.position);
-    }*/
-
     private Vector3 velocity = Vector3.zero; // Для SmoothDamp
     void LateUpdate()
     {

@@ -32,6 +32,11 @@ public class EnemyAttack : MonoBehaviour
                 enemyControl.Attack(target);
                 //print($"name={target.name} pos={target.position}  layer={LayerMask.NameToLayer("EnemyTarget")}");
             }
+            else
+            {
+                EnemyMovement enemyMovement = gameObject.GetComponent<EnemyMovement>();
+                if (enemyMovement != null) enemyMovement.SetIsMove(true);
+            }
         }
     }
 

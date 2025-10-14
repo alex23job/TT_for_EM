@@ -24,6 +24,8 @@ public class UI_Control : MonoBehaviour
     [SerializeField] private Text txtDefeatReason;
     [SerializeField] private GameObject winPanel;
 
+    [SerializeField] private Text txtDebug;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -109,5 +111,10 @@ public class UI_Control : MonoBehaviour
         btnSellAptechka.interactable = (gold >= 100);
         btnSellApple.interactable = (gold >= 30) && (false == isMaxHP);
         storePanel.SetActive(true);
+    }
+
+    public void ViewDebug(string txt)
+    {
+        txtDebug.text = txt;
     }
 }

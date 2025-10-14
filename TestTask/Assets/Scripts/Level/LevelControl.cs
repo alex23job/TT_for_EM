@@ -102,4 +102,9 @@ public class LevelControl : MonoBehaviour
         playSounds.PlayClip(1);
         ui_Control.ViewLossPanel(reason);
     }
+
+    public void ViewDebug(string txt)
+    {
+        ui_Control.ViewDebug(txt);
+    }
 }

@@ -10,11 +10,9 @@ public class EnemyControl : MonoBehaviour
     private int exp;
     private float radius = 1.5f;
     private int numArm = 0;
-    //private bool isAttackSound = false;
     private LevelControl levelControl;
     private EnemyMovement enemyMovement;
     private ArmTrigger armTrigger;
-    //private PlaySounds playSounds;
     private EnemyHP enemyHP;
     private GameObject enemyViewHP= null;
     private string enemyName;
@@ -27,7 +25,6 @@ public class EnemyControl : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         armTrigger = GetComponentInChildren<ArmTrigger>();
         enemyHP = GetComponentInChildren<EnemyHP>();
-        //playSounds = GetComponent<PlaySounds>();
         enemyViewHP = transform.GetChild(0).gameObject;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -100,6 +97,7 @@ public class EnemyControl : MonoBehaviour
 
     public void ChangeHP(int zn)
     {
+        if (levelControl != null) levelControl.ViewDebug($"d:{zn}");
         if ((zn < 0) && ((hp + zn) <= 0))
         {   //  убит
             hp = 0;

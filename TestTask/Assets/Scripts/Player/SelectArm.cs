@@ -14,6 +14,11 @@ public class SelectArm : MonoBehaviour
 
     public int ArmIndex { get => currentArmIndex; }
 
+    private void Awake()
+    {
+        PlayerControl playerControl = gameObject.GetComponent<PlayerControl>(); 
+        if (playerControl != null) isPlayerArm = true;        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +28,6 @@ public class SelectArm : MonoBehaviour
             if (i == 0) playerArm[i] = true;
             else playerArm[i] = false;
         }
-        PlayerControl playerControl = gameObject.GetComponent<PlayerControl>(); 
-        if (playerControl != null) isPlayerArm = true;
     }
 
     public void SetArmDamage(int[] dmg)

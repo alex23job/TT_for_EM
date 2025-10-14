@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float movementSpeed = 10f;
+    private float movementSpeed = 3f;
     private float rotationSpeed = 5f;
     private Vector3 target;
     private bool isMove = false;
@@ -45,7 +45,6 @@ public class EnemyMovement : MonoBehaviour
             // Проверяем, достигли ли мы текущей точки
             Vector2 pos = new Vector2(transform.position.x, transform.position.z);
             Vector2 tg = new Vector2(target.x, target.z);
-            //if (Vector3.Distance(transform.position, target) < stoppingDistance)
             if (Vector3.Distance(pos, tg) < stoppingDistance)
             {
                 NextPoint();
@@ -58,9 +57,7 @@ public class EnemyMovement : MonoBehaviour
                 // Перемещаем врага к текущей точке
                 MoveTowardsWaypoint();
             }
-            //anim.SetFloat("Speed", 1f);
         }
-        //else anim.SetBool("IsWalk", false);
     }
 
     public void EnemyDead()
@@ -81,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
         Vector3 direction = targetAttack.position - transform.position;
         direction.y = 0;
         if (targetAttack.CompareTag("Player"))
-        {
+        {            
             //print($"dir={direction}({direction.magnitude})  rot={Quaternion.LookRotation(direction)}");
             if (direction.magnitude < 1.3f)
             {
@@ -91,7 +88,7 @@ public class EnemyMovement : MonoBehaviour
                 anim.SetBool("IsWalk", false);
                 anim.SetBool("IsAttack", true);
                 Invoke("EndAttack", 0.5f);
-                
+                isMove = false;
             }
             else
             {
@@ -100,8 +97,8 @@ public class EnemyMovement : MonoBehaviour
                 anim.SetBool("IsWalk", true);
             }
         }
-        if (targetAttack.CompareTag("Temple"))
-        {
+        else if (targetAttack.CompareTag("Temple"))
+        {            
             //print($"Temple dist={direction.magnitude} dir={direction}");
             if (direction.magnitude < 2.9f)
             {
@@ -110,7 +107,7 @@ public class EnemyMovement : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(direction);
                 anim.SetBool("IsAttack", true);
                 Invoke("EndAttack", 0.5f);
-                
+                isMove = false;
             }
             else
             {
@@ -118,28 +115,8 @@ public class EnemyMovement : MonoBehaviour
                 if (false == isMove) transform.rotation = Quaternion.LookRotation(direction);
                 anim.SetBool("IsWalk", true);
             }
-            /*BoxCollider box = targetAttack.GetComponent<BoxCollider>();
-            
-            if (box != null)
-            {
-                target = targetAttack.transform.position;
-                Vector3 dir;
-                float distance;
-                Physics.ComputePenetration(capsule, transform.position, transform.rotation, box, box.transform.position, box.transform.rotation, out dir, out distance);
-                print($"enPos={transform.position} temlePos={box.transform.position} dir={dir} dist={distance}");
-                if (distance < 1f)
-                {
-                    isAttack = true;
-                    transform.rotation = Quaternion.LookRotation(direction);
-                    anim.SetBool("IsAttack", true);
-                    Invoke("EndAttack", 0.5f);
-                }
-                else
-                {
-                    rb.MovePosition(transform.position + dir.normalized * movementSpeed * Time.deltaTime);
-                }
-            }*/
         }
+        else isMove = true;
     }
 
     public void EndAttack()
@@ -147,6 +124,11 @@ public class EnemyMovement : MonoBehaviour
         anim.SetBool("IsAttack", false);
         anim.SetBool("IsWalk", isMove);
         isAttack = false;
+    }
+
+    public void SetIsMove(bool zn)
+    {
+        isMove = zn;
     }
 
     private void LookAtWaypoint()
@@ -175,7 +157,6 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             isMove = false;
-            //anim.SetFloat("Speed", 0);
             anim.SetBool("IsWalk", false);
         }
     }
@@ -188,7 +169,6 @@ public class EnemyMovement : MonoBehaviour
         target = points[curIndex];
         this.isPatrouille = isPatrouille;
         isMove = true;
-        //anim.SetFloat("Speed", 1f);
         anim.SetBool("IsWalk", true);
     }
 }

@@ -38,6 +38,7 @@ public class BulletControl : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             if (false == isPlayerArm) return;
+            print($"name={gameObject.name}  damage={damage}");
             EnemyControl enemyControl = other.gameObject.GetComponent<EnemyControl>();
             if (enemyControl != null) enemyControl.ChangeHP(-damage);
             //Destroy(other.gameObject);

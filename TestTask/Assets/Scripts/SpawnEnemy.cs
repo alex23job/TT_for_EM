@@ -27,12 +27,15 @@ public class SpawnEnemy : MonoBehaviour
     private void Awake()
     {
         playSounds = gameObject.GetComponent<PlaySounds>();
+        if (transform.localScale.x > 140) isBoss = true;
+        //print($"spawnEnemy localScale={transform.localScale} isBoss={isBoss}");
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-        if (transform.localScale.x > 140) isBoss = true;
+    {        
         isPause = true;
+        //print($"spawnEnemy localScale={transform.localScale} isBoss={isBoss} spawnID={spawnID}");
     }
 
     // Update is called once per frame
@@ -148,11 +151,17 @@ public class SpawnEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        isPause = false;
+        if (other.CompareTag("Player"))
+        {
+            isPause = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isPause = true;
+        if (other.CompareTag("Player"))
+        {
+            isPause = true;
+        }
     }
 }
